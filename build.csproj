@@ -162,6 +162,7 @@
     <None Include="push_latest_work.ps1" />
     <None Include="rakefile.rb" />
     <None Include="start_new_exercise.ps1" />
+    <None Include="trash" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
