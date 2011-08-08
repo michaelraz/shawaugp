@@ -66,6 +66,10 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
         {
+            foreach (var movie in movies)
+            {
+                
+            }
             throw new NotImplementedException();
         }
 
