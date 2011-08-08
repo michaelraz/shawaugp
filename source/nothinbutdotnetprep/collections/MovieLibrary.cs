@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.utility;
+using nothinbutdotnetprep.utility.filtering;
 
 namespace nothinbutdotnetprep.collections
 {

@@ -1,4 +1,4 @@
-﻿namespace nothinbutdotnetprep.utility
+﻿namespace nothinbutdotnetprep.utility.filtering
 {
     public class OrMatch<ItemToMatch> : IMatchAnItem<ItemToMatch>
     {

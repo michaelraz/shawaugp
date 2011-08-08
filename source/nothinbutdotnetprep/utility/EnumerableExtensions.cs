@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using nothinbutdotnetprep.utility.filtering;
 
 namespace nothinbutdotnetprep.utility
 {

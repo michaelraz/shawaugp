@@ -1,4 +1,6 @@
-﻿namespace nothinbutdotnetprep.utility
+﻿using System;
+
+namespace nothinbutdotnetprep.utility.filtering
 {
     public static class MatcherExtensions
     {
@@ -12,6 +14,11 @@
                                                                 IMatchAnItem<ItemToMatch> right_side)
         {
             return new OrMatch<ItemToMatch>(left_side, right_side);
+        }
+
+        public static IMatchAnItem<ItemToMatch> equal_to<ItemToMatch,PropertyType>(this Func<ItemToMatch,PropertyType> accessor,PropertyType value_to_equal)
+        {
+            return new AnonymousMatch<ItemToMatch>(item => accessor(item).Equals(value_to_equal));
         }
     }
 }
