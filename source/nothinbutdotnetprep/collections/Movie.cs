@@ -44,6 +44,11 @@ namespace nothinbutdotnetprep.collections
             return new IsPublishedBy(studio);
         }
 
+		public static IMatchAnItem<Movie> is_match(Condition<Movie> matchCondition)
+		{
+			return new AnonymousMatch<Movie>(matchCondition);
+		}
+
         public static IMatchAnItem<Movie> is_published_by_pixar_or_disney()
         {
             return is_published_by(ProductionStudio.Pixar)
