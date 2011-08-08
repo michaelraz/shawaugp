@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using nothinbutdotnetprep.utility;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -14,7 +15,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return this.movies;
+            return movies.one_at_a_time();
         }
 
         public void add(Movie movie)
@@ -26,12 +27,7 @@ namespace nothinbutdotnetprep.collections
 
         bool already_contains(Movie movie)
         {
-            foreach (var tmpMovie in movies)
-            {
-                if (tmpMovie.title == movie.title)
-                    return true;
-            }
-            return false;
+            return movies.Contains(movie);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending()
@@ -44,13 +40,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            var list = new List<Movie>();
-            foreach (var movie in movies)
-            {
-                if (movie.production_studio == ProductionStudio.Pixar)
-                    list.Add(movie);
-            }
-            return list;
+            return get_all_movies_matching(movie => movie.production_studio == ProductionStudio.Pixar);
         }
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
@@ -80,13 +70,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            var list = new List<Movie>();
-            foreach (var movie in movies)
-            {
-                if (movie.production_studio != ProductionStudio.Pixar)
-                    list.Add(movie);
-            }
-            return list;
+            return movies.all_items_matching(movie => movie.production_studio != ProductionStudio.Pixar);
         }
 
         public IEnumerable<Movie> all_movies_published_after(int year)
@@ -113,37 +97,28 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_kid_movies()
         {
-            return getAllmoviesWith(isKidsGenre);
+            return get_all_movies_matching(item => item.genre == Genre.kids);
         }
 
         public IEnumerable<Movie> all_action_movies()
         {
-            return getAllmoviesWith(isActionGenre);
+            return get_all_movies_matching(is_action_genre());
         }
 
-        public bool isActionGenre(Genre genre)
+        public Condition<Movie> is_action_genre()
         {
-            return genre == Genre.action;
+            return movie => movie.genre == Genre.action;
         }
 
-        public bool isKidsGenre(Genre genre)
+        public Condition<Movie> is_kids_genre(Genre genre)
         {
-            return genre == Genre.kids;
+            return movie => movie.genre == Genre.kids;
         }
 
-        public delegate bool isSatisfiedBy(Genre genre);
-
-        public IEnumerable<Movie> getAllmoviesWith(isSatisfiedBy isSatisfiedBy)
+        public IEnumerable<Movie> get_all_movies_matching(Condition<Movie> movie_criteria)
         {
-            var list = new List<Movie>();
-            foreach (var movie in movies)
-            {
-                if (isSatisfiedBy(movie.genre))
-                    list.Add(movie);
-            }
-            return list;
+            return movies.all_items_matching(movie_criteria.Invoke);
         }
-
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
         {
