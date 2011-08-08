@@ -100,24 +100,10 @@ namespace nothinbutdotnetprep.collections
             return get_all_movies_matching(item => item.genre == Genre.kids);
         }
 
-        public IEnumerable<Movie> all_action_movies()
-        {
-            return get_all_movies_matching(is_action_genre());
-        }
-
-        public Condition<Movie> is_action_genre()
-        {
-            return movie => movie.genre == Genre.action;
-        }
-
-        public Condition<Movie> is_kids_genre(Genre genre)
-        {
-            return movie => movie.genre == Genre.kids;
-        }
 
         public IEnumerable<Movie> get_all_movies_matching(Condition<Movie> movie_criteria)
         {
-            return movies.all_items_matching(new AnonymousMatch(movie_criteria));
+            return movies.all_items_matching(new AnonymousMatch<Movie>(movie_criteria));
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
@@ -126,6 +112,11 @@ namespace nothinbutdotnetprep.collections
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Movie> all_action_movies()
         {
             throw new NotImplementedException();
         }
