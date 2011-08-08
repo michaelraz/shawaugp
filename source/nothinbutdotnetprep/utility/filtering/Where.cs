@@ -1,28 +1,33 @@
 using System;
-using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.utility.filtering
 {
     public class Where<ItemToMatch>
     {
-        public static Filter<ItemToMatch, PropertyType> has_a<PropertyType>(Func<ItemToMatch, PropertyType> accessor)
+        public static CriteriaFactory<ItemToMatch, PropertyType> has_a<PropertyType>(
+            Func<ItemToMatch, PropertyType> accessor)
         {
-            return new Filter<ItemToMatch, PropertyType>(accessor);
+            return new CriteriaFactory<ItemToMatch, PropertyType>(accessor);
         }
     }
 
-    public class Filter<ItemToMatch, PropertyType>
+    public class CriteriaFactory<ItemToMatch, PropertyType>
     {
-        private readonly Func<ItemToMatch, PropertyType> accessor;
+        Func<ItemToMatch, PropertyType> accessor;
 
-        public Filter(Func<ItemToMatch, PropertyType> accessor)
+        public CriteriaFactory(Func<ItemToMatch, PropertyType> accessor)
         {
             this.accessor = accessor;
         }
 
-        public Condition<Movie> equal_to(ProductionStudio studio)
+        public IMatchAnItem<ItemToMatch> equal_to(PropertyType value)
         {
-            return accessor(studio).Equals();
+            return new AnonymousMatch<ItemToMatch>(item => accessor(item).Equals(value));
+        }
+
+        public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
+        {
+            throw new NotImplementedException();
         }
     }
 }
