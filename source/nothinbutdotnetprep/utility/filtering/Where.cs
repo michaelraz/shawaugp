@@ -27,7 +27,14 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
         {
-            throw new NotImplementedException();
+			IMatchAnItem<ItemToMatch> matcher = new AnonymousMatch<ItemToMatch>(item => false);
+			if (possible_values == null)
+				return matcher;
+        	
+			foreach (var value in possible_values)
+        		matcher = matcher.or(equal_to(value));
+
+        	return matcher;
         }
     }
 }
