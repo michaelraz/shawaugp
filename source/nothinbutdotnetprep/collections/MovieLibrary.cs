@@ -19,11 +19,12 @@ namespace nothinbutdotnetprep.collections
 
         public void add(Movie movie)
         {
-            if(!IsMovieInList(movie))
-                movies.Add(movie);
+            if (already_contains(movie)) return;
+
+            movies.Add(movie);
         }
 
-        private bool IsMovieInList(Movie movie)
+        bool already_contains(Movie movie)
         {
             foreach (var tmpMovie in movies)
             {
@@ -37,7 +38,6 @@ namespace nothinbutdotnetprep.collections
         {
             foreach (var movie in movies)
             {
-                
             }
             throw new NotImplementedException();
         }
@@ -47,7 +47,7 @@ namespace nothinbutdotnetprep.collections
             var list = new List<Movie>();
             foreach (var movie in movies)
             {
-                if(movie.production_studio == ProductionStudio.Pixar)
+                if (movie.production_studio == ProductionStudio.Pixar)
                     list.Add(movie);
             }
             return list;
@@ -58,7 +58,8 @@ namespace nothinbutdotnetprep.collections
             var list = new List<Movie>();
             foreach (var movie in movies)
             {
-                if (movie.production_studio == ProductionStudio.Pixar|| movie.production_studio == ProductionStudio.Disney)
+                if (movie.production_studio == ProductionStudio.Pixar ||
+                    movie.production_studio == ProductionStudio.Disney)
                     list.Add(movie);
             }
             return list;
@@ -68,7 +69,6 @@ namespace nothinbutdotnetprep.collections
         {
             foreach (var movie in movies)
             {
-                
             }
             throw new NotImplementedException();
         }
@@ -83,7 +83,7 @@ namespace nothinbutdotnetprep.collections
             var list = new List<Movie>();
             foreach (var movie in movies)
             {
-                if (movie.production_studio!= ProductionStudio.Pixar)
+                if (movie.production_studio != ProductionStudio.Pixar)
                     list.Add(movie);
             }
             return list;
@@ -105,7 +105,7 @@ namespace nothinbutdotnetprep.collections
             var list = new List<Movie>();
             foreach (var movie in movies)
             {
-                if (movie.date_published.Year >=  startingYear  &&  movie.date_published.Year <= endingYear)
+                if (movie.date_published.Year >= startingYear && movie.date_published.Year <= endingYear)
                     list.Add(movie);
             }
             return list;
