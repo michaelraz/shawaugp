@@ -9,11 +9,12 @@ namespace nothinbutdotnetprep.utility
             return items.all_items_matching(condition.matches);
         }
 
-        static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, Condition<T> condition)
+        public static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, Condition<T> condition)
         {
             foreach (var item in items) if (condition(item)) yield return item;
         }
-        public static IEnumerable<T> one_at_a_time<T>(this IEnumerable<T> items )
+
+        public static IEnumerable<T> one_at_a_time<T>(this IEnumerable<T> items)
         {
             foreach (var item in items) yield return item;
         }

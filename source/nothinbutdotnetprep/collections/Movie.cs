@@ -46,7 +46,7 @@ namespace nothinbutdotnetprep.collections
 
 		public static IMatchAnItem<Movie> is_match(Condition<Movie> matchCondition)
 		{
-			return new MovieMatch(matchCondition);
+			return new AnonymousMatch<Movie>(matchCondition);
 		}
 
         public static IMatchAnItem<Movie> is_published_by_pixar_or_disney()
