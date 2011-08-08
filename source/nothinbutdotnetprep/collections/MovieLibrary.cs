@@ -113,25 +113,37 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_kid_movies()
         {
+            return getAllmoviesWith(isKidsGenre);
+        }
+
+        public IEnumerable<Movie> all_action_movies()
+        {
+            return getAllmoviesWith(isActionGenre);
+        }
+
+        public bool isActionGenre(Genre genre)
+        {
+            return genre == Genre.action;
+        }
+
+        public bool isKidsGenre(Genre genre)
+        {
+            return genre == Genre.kids;
+        }
+
+        public delegate bool isSatisfiedBy(Genre genre);
+
+        public IEnumerable<Movie> getAllmoviesWith(isSatisfiedBy isSatisfiedBy)
+        {
             var list = new List<Movie>();
             foreach (var movie in movies)
             {
-                if (movie.genre == Genre.kids)
+                if (isSatisfiedBy(movie.genre))
                     list.Add(movie);
             }
             return list;
         }
 
-        public IEnumerable<Movie> all_action_movies()
-        {
-            var list = new List<Movie>();
-            foreach (var movie in movies)
-            {
-                if (movie.genre == Genre.action)
-                    list.Add(movie);
-            }
-            return list;
-        }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
         {
