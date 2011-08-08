@@ -70,7 +70,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            return movies.all_items_matching(movie => movie.production_studio != ProductionStudio.Pixar);
+            return movies.all_items_matching(new MovieMatch(movie => movie.production_studio != ProductionStudio.Pixar));
         }
 
         public IEnumerable<Movie> all_movies_published_after(int year)
@@ -117,7 +117,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> get_all_movies_matching(Condition<Movie> movie_criteria)
         {
-            return movies.all_items_matching(movie_criteria.Invoke);
+            return movies.all_items_matching(new MovieMatch(movie_criteria));
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
