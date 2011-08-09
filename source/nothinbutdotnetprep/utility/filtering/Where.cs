@@ -15,11 +15,11 @@ namespace nothinbutdotnetprep.utility.filtering
             Func<ItemToMatch, PropertyType> accessor)
 			 where PropertyType : IComparable<PropertyType>
         {
-			return new ComparableCriteriaFactory<ItemToMatch, PropertyType>(accessor);
+			return new ComparableCriteriaFactory<ItemToMatch, PropertyType>(accessor,has_a(accessor));
         }
     }
 
-    public class CriteriaFactory<ItemToMatch, PropertyType> 
+    public class CriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
         Func<ItemToMatch, PropertyType> accessor;
 

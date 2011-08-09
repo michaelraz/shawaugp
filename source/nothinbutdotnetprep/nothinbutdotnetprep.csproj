@@ -69,6 +69,7 @@
     <Compile Include="utility\filtering\ComparableCriteriaFactory.cs" />
     <Compile Include="utility\filtering\Condition.cs" />
     <Compile Include="utility\filtering\AndMatch.cs" />
+    <Compile Include="utility\filtering\ICreateSpecifications.cs" />
     <Compile Include="utility\filtering\IMatchAnItem.cs" />
     <Compile Include="utility\filtering\MatcherExtensions.cs" />
     <Compile Include="utility\filtering\NegatingMatch.cs" />
