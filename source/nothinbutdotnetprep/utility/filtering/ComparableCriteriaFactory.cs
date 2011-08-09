@@ -6,7 +6,7 @@ namespace nothinbutdotnetprep.utility.filtering
     {
         Func<ItemToMatch, PropertyType> accessor;
 
-		public ComparableCriteriaFactory(Func<ItemToMatch, PropertyType> accessor)
+        public ComparableCriteriaFactory(Func<ItemToMatch, PropertyType> accessor)
         {
             this.accessor = accessor;
         }
@@ -14,6 +14,11 @@ namespace nothinbutdotnetprep.utility.filtering
         public IMatchAnItem<ItemToMatch> greater_than(PropertyType value)
         {
             return new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(value) > 0);
+        }
+
+        public IMatchAnItem<ItemToMatch> between(PropertyType start, PropertyType end)
+        {
+            throw new NotImplementedException();
         }
     }
 }
