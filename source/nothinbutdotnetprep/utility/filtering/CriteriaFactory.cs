@@ -18,8 +18,7 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
         {
-            return create(new IsEqualToAny<PropertyType>(possible_values)))
-            ;
+            return create(new IsEqualToAny<PropertyType>(possible_values));
         }
 
         public IMatchAnItem<ItemToMatch> create(IMatchAnItem<PropertyType> condition)
