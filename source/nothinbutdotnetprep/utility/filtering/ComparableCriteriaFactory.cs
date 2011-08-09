@@ -1,16 +1,14 @@
 ﻿using System;
+using nothinbutdotnetprep.utility.ranges;
 
 namespace nothinbutdotnetprep.utility.filtering
 {
     public class ComparableCriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
         where PropertyType : IComparable<PropertyType>
     {
-        Func<ItemToMatch, PropertyType> accessor;
 
-        public ComparableCriteriaFactory(Func<ItemToMatch, PropertyType> accessor,
-                                         ICreateSpecifications<ItemToMatch, PropertyType> original)
+        public ComparableCriteriaFactory( ICreateSpecifications<ItemToMatch, PropertyType> original)
         {
-            this.accessor = accessor;
             this.original = original;
         }
 
@@ -29,7 +27,7 @@ namespace nothinbutdotnetprep.utility.filtering
             return original.not_equal_to(value);
         }
 
-        public IMatchAnItem<ItemToMatch> create(Condition<ItemToMatch> condition)
+        public IMatchAnItem<ItemToMatch> create(IMatchAnItem<PropertyType> condition)
         {
             return original.create(condition);
         }
@@ -38,13 +36,12 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> greater_than(PropertyType value)
         {
-            return create(item => accessor(item).CompareTo(value) > 0);
+            return create(new IsGreaterThan<PropertyType>(value));
         }
 
         public IMatchAnItem<ItemToMatch> between(PropertyType start, PropertyType end)
         {
-            return create(item => accessor(item).CompareTo(start) >= 0)
-                .and(create(item => accessor(item).CompareTo(end) <= 0));
+            return create(new FallsInRange<PropertyType>(new InclusiveRange<PropertyType>(start, end)));
         }
     }
 }

@@ -17,12 +17,4 @@ namespace nothinbutdotnetprep.utility.filtering
 			return new ComparableCriteriaFactory<ItemToMatch, PropertyType>(accessor,has_a(accessor));
         }
     }
-
-    public class MatchesNothing<T> : IMatchAnItem<T>
-    {
-        public bool matches(T item)
-        {
-            return false;
-        }
-    }
 }

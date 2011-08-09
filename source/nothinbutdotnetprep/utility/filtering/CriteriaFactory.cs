@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility.filtering
 {
@@ -14,23 +13,23 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> equal_to(PropertyType value)
         {
-            return create(item => accessor(item).Equals(value));
+            return equal_to_any(value);
         }
 
         public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
         {
-            return create(item => new List<PropertyType>(possible_values).Contains(accessor(item)));
+            return create(new IsEqualToAny<PropertyType>(possible_values)))
+            ;
         }
 
-        public IMatchAnItem<ItemToMatch> create(Condition<ItemToMatch> condition)
+        public IMatchAnItem<ItemToMatch> create(IMatchAnItem<PropertyType> condition)
         {
-            return new AnonymousMatch<ItemToMatch>(condition);
+            return new PropertyMatch<ItemToMatch, PropertyType>(accessor, condition);
         }
 
         public IMatchAnItem<ItemToMatch> not_equal_to(PropertyType value)
         {
             return equal_to(value).not();
         }
-
     }
 }
