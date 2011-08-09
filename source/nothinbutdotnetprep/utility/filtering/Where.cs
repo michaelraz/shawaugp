@@ -30,13 +30,17 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> equal_to(PropertyType value)
         {
-            return new AnonymousMatch<ItemToMatch>(item => accessor(item).Equals(value));
+            return create(item => accessor(item).Equals(value));
         }
 
         public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
         {
-            return
-                new AnonymousMatch<ItemToMatch>(item => new List<PropertyType>(possible_values).Contains(accessor(item)));
+            return create(item => new List<PropertyType>(possible_values).Contains(accessor(item)));
+        }
+
+        public IMatchAnItem<ItemToMatch> create(Condition<ItemToMatch> condition)
+        {
+            return new AnonymousMatch<ItemToMatch>(condition);
         }
 
         public IMatchAnItem<ItemToMatch> not_equal_to(PropertyType value)

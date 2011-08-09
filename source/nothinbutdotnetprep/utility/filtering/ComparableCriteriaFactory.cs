@@ -29,17 +29,22 @@ namespace nothinbutdotnetprep.utility.filtering
             return original.not_equal_to(value);
         }
 
+        public IMatchAnItem<ItemToMatch> create(Condition<ItemToMatch> condition)
+        {
+            return original.create(condition);
+        }
+
         ICreateSpecifications<ItemToMatch, PropertyType> original;
 
         public IMatchAnItem<ItemToMatch> greater_than(PropertyType value)
         {
-            return new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(value) > 0);
+            return create(item => accessor(item).CompareTo(value) > 0);
         }
 
         public IMatchAnItem<ItemToMatch> between(PropertyType start, PropertyType end)
         {
-            return new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(start) >= 0)
-                .and(new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(end) <= 0));
+            return create(item => accessor(item).CompareTo(start) >= 0)
+                .and(create(item => accessor(item).CompareTo(end) <= 0));
         }
     }
 }
