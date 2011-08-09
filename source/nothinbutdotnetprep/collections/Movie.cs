@@ -1,6 +1,4 @@
 using System;
-using nothinbutdotnetprep.utility;
-using nothinbutdotnetprep.utility.filtering;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -34,28 +32,5 @@ namespace nothinbutdotnetprep.collections
         {
             return Equals(obj as Movie);
         }
-
-        public static IMatchAnItem<Movie> is_in_genre(Genre genre)
-        {
-            return new IsInGenre(genre);
-        }
-
-        public static IMatchAnItem<Movie> is_published_by(ProductionStudio studio)
-        {
-            return new IsPublishedBy(studio);
-        }
-
-		public static IMatchAnItem<Movie> is_match(Condition<Movie> matchCondition)
-		{
-			return new AnonymousMatch<Movie>(matchCondition);
-		}
-
-        public static IMatchAnItem<Movie> is_published_by_pixar_or_disney()
-        {
-            return is_published_by(ProductionStudio.Pixar)
-                .or(is_published_by(ProductionStudio.Disney).not());
-
-        }
-
     }
 }
