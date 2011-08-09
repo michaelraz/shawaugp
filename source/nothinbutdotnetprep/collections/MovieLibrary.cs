@@ -4,10 +4,7 @@ using nothinbutdotnetprep.utility;
 
 namespace nothinbutdotnetprep.collections
 {
-
-
-
-    public class MovieLibrary 
+    public class MovieLibrary
     {
         IList<Movie> movies;
 

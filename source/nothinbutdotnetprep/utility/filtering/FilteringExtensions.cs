@@ -18,7 +18,7 @@ namespace nothinbutdotnetprep.utility.filtering
         public static IMatchAnItem<ItemToMatch> greater_than<ItemToMatch>(
             this IProvideAccessToFiltering<ItemToMatch, DateTime> extension,int value)
         {
-            return create(extension, new DateIsGreaterThan(value));
+            return create(extension, new YearOfDateIsGreaterThanYear(value));
         }
 
         public static IMatchAnItem<ItemToMatch> greater_than<ItemToMatch, PropertyType>(
@@ -39,21 +39,6 @@ namespace nothinbutdotnetprep.utility.filtering
             this IProvideAccessToFiltering<ItemToMatch, PropertyType> extension, IMatchAnItem<PropertyType> condition)
         {
             return extension.create_criteria(condition);
-        }
-    }
-
-    public class DateIsGreaterThan : IMatchAnItem<DateTime>
-    {
-        int year;
-
-        public DateIsGreaterThan(int year)
-        {
-            this.year = year;
-        }
-
-        public bool matches(DateTime item)
-        {
-            return item.Year > year;
         }
     }
 }
