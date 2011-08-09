@@ -18,10 +18,8 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> between(PropertyType start, PropertyType end)
         {
-            return new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(start) > 0)
-                .or(new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(start) == 0))
-                .and(new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(end) < 0))
-                .or(new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(end) == 0));
+            return new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(start) >= 0)
+                .and(new AnonymousMatch<ItemToMatch>(item => accessor(item).CompareTo(end) <= 0));
         }
     }
 }
