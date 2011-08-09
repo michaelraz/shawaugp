@@ -283,7 +283,8 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_sort_all_movies_by_title_ascending = () =>
 			{
-				IComparer<Movie> comparer = Compare<Movie>.by_ascending(x => x.title);
+				IComparer<Movie> comparer = Compare<Movie>.by(x => x.title).
+                    then_by(x => x.rating);
 
 				var results = sut.all_movies().sort_using(comparer);
 
@@ -306,8 +307,7 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_sort_all_movies_by_date_published_ascending = () =>
             {
-				//var results = sut.sort_all_movies_by_date_published_ascending();
-				IComparer<Movie> comparer = Compare<Movie>.by_ascending(x => x.date_published);
+				IComparer<Movie> comparer = Compare<Movie>.by(x => x.date_published);
 
 				var results = sut.all_movies().sort_using(comparer);
 
@@ -331,12 +331,18 @@ namespace nothinbutdotnetprep.specs
                  * year published. For this test you cannot add any extra properties/fields to either the ProductionStudio or
                  * Movie classes.*/
 
-				//var results = sut.sort_all_movies_by_movie_studio_and_year_published();
 
-				IComparer<Movie> compareStudio = Compare<Movie>.by_ascending(x => x.production_studio);
-				IComparer<Movie> compareYearPublished = Compare<Movie>.by_ascending(x => x.date_published.Year);
+                var comparer = Compare<Movie>.by(x => x.production_studio,
+                                                 ProductionStudio.MGM,
+                                                 ProductionStudio.Pixar,
+                                                 ProductionStudio.Dreamworks,
+                                                 ProductionStudio.Universal,
+                                                 ProductionStudio.Disney,
+                                                 ProductionStudio.Paramount)
+                                            .then_by(x => x.date_published);
 
-				var results = sut.all_movies().sort_using(compareStudio, compareYearPublished);
+
+				var results = sut.all_movies().sort_using(comparer);
 
                 results.ShouldContainOnlyInOrder(the_ring, theres_something_about_mary, a_bugs_life, cars, shrek,
                                                  indiana_jones_and_the_temple_of_doom,

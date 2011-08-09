@@ -83,8 +83,11 @@
     <Compile Include="utility\filtering\YearOfDateIsGreaterThanYear.cs" />
     <Compile Include="utility\ranges\InclusiveRange.cs" />
     <Compile Include="utility\ranges\IRange.cs" />
+    <Compile Include="utility\sorting\ChainedComparer.cs" />
     <Compile Include="utility\sorting\Compare.cs" />
+    <Compile Include="utility\sorting\ComparerBuilder.cs" />
     <Compile Include="utility\sorting\ItemComparer.cs" />
+    <Compile Include="utility\sorting\NegatingComparer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

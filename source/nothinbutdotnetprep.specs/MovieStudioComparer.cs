@@ -9,7 +9,7 @@ namespace nothinbutdotnetprep.specs
     {
     	private readonly Func<Movie, PropertyType> accessor;
 
-		public MovieComparer(Func<Movie, PropertyType> accessor)
+		public MovieStudioComparer(Func<Movie, PropertyType> accessor)
 		{
 			this.accessor = accessor;
 		}
