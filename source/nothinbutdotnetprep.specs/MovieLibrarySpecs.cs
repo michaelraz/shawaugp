@@ -307,7 +307,7 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_sort_all_movies_by_date_published_ascending = () =>
             {
-				IComparer<Movie> comparer = Compare<Movie>.by(x => x.date_published);
+				var comparer = Compare<Movie>.by(x => x.date_published);
 
 				var results = sut.all_movies().sort_using(comparer);
 

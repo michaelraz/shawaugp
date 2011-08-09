@@ -84,9 +84,11 @@
     <Compile Include="utility\ranges\InclusiveRange.cs" />
     <Compile Include="utility\ranges\IRange.cs" />
     <Compile Include="utility\sorting\ChainedComparer.cs" />
+    <Compile Include="utility\sorting\ComparableComparer.cs" />
     <Compile Include="utility\sorting\Compare.cs" />
     <Compile Include="utility\sorting\ComparerBuilder.cs" />
-    <Compile Include="utility\sorting\ItemComparer.cs" />
+    <Compile Include="utility\sorting\FixedComparer.cs" />
+    <Compile Include="utility\sorting\PropertyComparer.cs" />
     <Compile Include="utility\sorting\NegatingComparer.cs" />
   </ItemGroup>
   <ItemGroup>

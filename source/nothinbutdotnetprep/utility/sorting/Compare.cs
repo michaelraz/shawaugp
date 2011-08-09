@@ -8,7 +8,7 @@ namespace nothinbutdotnetprep.utility.sorting
         public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
-            return new ComparerBuilder<ItemToSort>(new ItemComparer<ItemToSort, PropertyType>(accessor));
+            return new ComparerBuilder<ItemToSort>(new PropertyComparer<ItemToSort, PropertyType>(accessor,new ComparableComparer<PropertyType>()));
         }
 
         public static ComparerBuilder<ItemToSort> by_descending<PropertyType>(Func<ItemToSort, PropertyType> accessor)
@@ -19,10 +19,7 @@ namespace nothinbutdotnetprep.utility.sorting
 
         public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor, params PropertyType[] order)
 		{
-        	IList<PropertyType> list = order;
-        	Func<ItemToSort, int> indexAccessor = item => list.IndexOf(accessor(item));
-
-			return new ComparerBuilder<ItemToSort>(new ItemComparer<ItemToSort, int>(indexAccessor));
+			return new ComparerBuilder<ItemToSort>(new PropertyComparer<ItemToSort, PropertyType>(accessor,new FixedComparer<PropertyType>(order)));
         }
     }
 }
