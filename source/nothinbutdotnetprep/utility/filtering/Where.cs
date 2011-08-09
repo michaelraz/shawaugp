@@ -15,6 +15,7 @@ namespace nothinbutdotnetprep.utility.filtering
     public class CriteriaFactory<ItemToMatch, PropertyType>
     {
         Func<ItemToMatch, PropertyType> accessor;
+        private bool negate = false;
 
         public CriteriaFactory(Func<ItemToMatch, PropertyType> accessor)
         {
@@ -23,18 +24,31 @@ namespace nothinbutdotnetprep.utility.filtering
 
         public IMatchAnItem<ItemToMatch> equal_to(PropertyType value)
         {
-            return equal_to_any(value);
+            return apply_negate(new AnonymousMatch<ItemToMatch>(item => accessor(item).Equals(value)));
         }
 
         public IMatchAnItem<ItemToMatch> equal_to_any(params PropertyType[] possible_values)
         {
-            return
-                new AnonymousMatch<ItemToMatch>(item => new List<PropertyType>(possible_values).Contains(accessor(item)));
+            return apply_negate(new AnonymousMatch<ItemToMatch>(item => new List<PropertyType>(possible_values).Contains(accessor(item))));
+        }
+
+        public CriteriaFactory<ItemToMatch, PropertyType> not()
+        {
+            this.negate= true;
+            return this;
+        }
+
+        private IMatchAnItem<ItemToMatch> apply_negate(IMatchAnItem<ItemToMatch> criteria)
+        {
+            if (this.negate)
+                return new NegatingMatch<ItemToMatch>(criteria);
+            else
+                return criteria;
         }
 
         public IMatchAnItem<ItemToMatch> not_equal_to(PropertyType value)
         {
-            throw new NotImplementedException();
+            return new NegatingMatch<ItemToMatch>(equal_to(value));
         }
     }
 
