@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility.sorting
 {
@@ -16,10 +17,12 @@ namespace nothinbutdotnetprep.utility.sorting
             return new ComparerBuilder<ItemToSort>(new NegatingComparer<ItemToSort>(by(accessor)));
         }
 
-        public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor,
-                                                                                params PropertyType[] order)
-        {
-            throw new NotImplementedException();
+        public static ComparerBuilder<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor, params PropertyType[] order)
+		{
+        	IList<PropertyType> list = order;
+        	Func<ItemToSort, int> indexAccessor = item => list.IndexOf(accessor(item));
+
+			return new ComparerBuilder<ItemToSort>(new ItemComparer<ItemToSort, int>(indexAccessor));
         }
     }
 }
