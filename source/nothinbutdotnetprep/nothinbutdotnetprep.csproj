@@ -66,11 +66,10 @@
     <Compile Include="collections\ReadOnlySet.cs" />
     <Compile Include="utility\EnumerableExtensions.cs" />
     <Compile Include="utility\filtering\AnonymousMatch.cs" />
-    <Compile Include="utility\filtering\ComparableCriteriaFactory.cs" />
     <Compile Include="utility\filtering\Condition.cs" />
     <Compile Include="utility\filtering\AndMatch.cs" />
-    <Compile Include="utility\filtering\CriteriaFactory.cs" />
-    <Compile Include="utility\filtering\ICreateSpecifications.cs" />
+    <Compile Include="utility\filtering\FilteringExtensionPoint.cs" />
+    <Compile Include="utility\filtering\FilteringExtensions.cs" />
     <Compile Include="utility\filtering\IMatchAnItem.cs" />
     <Compile Include="utility\filtering\FallsInRange.cs" />
     <Compile Include="utility\filtering\IsEqualToAny.cs" />
